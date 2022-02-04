@@ -1,10 +1,10 @@
 # nft-ticketing-usecase
-In this repo there are 4 different Smart Contract for the Paaspo PoC.
+In this repo there are 3 different Smart Contract for the Paaspo PoC.
 
 - Marketplace.sol
 - Mint_721_Collection.sol
-- Iexec_Oracle_Call.sol
 - Iexec_Abstract.sol
 
-Two of them are related to the iexec oracle call. The Abstract Contract defines the function that an be used to retrieve data while the actual oracle call is made in the Iexec_Oracle_call.sol. The Marketplace.sol contract orchestrate the Sale and Buy operation in the marketplace.
-The Mint_721_Collection.sol is used to mint a new erc-721 collection.
+ The Iexec_Abstract.sol is composed by two contracts. The first one defined is an abstract contract in which the function to retrieve the data is defined. ( At the moment only getInt is implemented because is the only function needed for the Vaccine Counter Oracle). The second contract of the Iexec_Abstract.sol is used to make the actual oracle call to the Vaccine Counter Oracle. 
+The Marketplace.sol contract orchestarte the Buy and Sell Operations of the marketplace, while emitting events that will be retrieve bu the Web3App in order to organize the front end.
+The Mint_721_Collection.sol is used to mint a new erc-721 collection. This Contract is composed by two contracts in order to deploy different collection from one contract address. This auto-deployment feature was needed in order managing the Dapp back end
