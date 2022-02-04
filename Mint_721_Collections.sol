@@ -5,7 +5,7 @@ import "github.com/OpenZeppelin/openzeppelin-contracts/contracts/utils/Counters.
 
 
 contract ChessBeautyCollection {
-  MyGame  public collection;
+  MyTicket  public collection;
   address public owner;
 
     constructor() {
@@ -16,7 +16,7 @@ contract ChessBeautyCollection {
         returns(address)
         
     {
-     collection = new MyGame (collectionName,  NFTName);  
+     collection = new MyTicket (collectionName,  NFTName);  
       
     }
  function _mintToken(string memory TokenURI)
@@ -25,7 +25,7 @@ contract ChessBeautyCollection {
      return collection.mintToken(TokenURI, owner);
  }
 }
-contract MyGame  is ERC721URIStorage {
+contract MyTicket  is ERC721URIStorage {
     using Counters for Counters.Counter;
     
     Counters.Counter private _tokenIds;
