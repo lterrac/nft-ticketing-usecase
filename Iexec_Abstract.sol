@@ -1,7 +1,11 @@
-pragma solidity >=0.4.21 <0.8.0;
-contract Oracle {
-    function getInt(bytes32) public view returns (int256, uint256);
+
+pragma solidity ^0.8.7;
+
+
+abstract contract Oracle  {
+   function getInt(bytes32) public view virtual returns (int256, uint256);
     }
+
 contract SimpleOracleStorage {
     int256 storedValue;
     uint256 storedDate;
@@ -19,3 +23,4 @@ contract SimpleOracleStorage {
             return (storedValue, storedDate);
             }
             }
+
