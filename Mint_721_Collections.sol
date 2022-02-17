@@ -4,7 +4,7 @@ import "github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC721/ex
 import "github.com/OpenZeppelin/openzeppelin-contracts/contracts/utils/Counters.sol";
 
 
-contract ChessBeautyCollection {
+contract PaasPopCollection {
   MyTicket  public collection;
   address public owner;
 
