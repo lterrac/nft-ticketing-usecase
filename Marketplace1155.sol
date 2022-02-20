@@ -83,7 +83,7 @@ import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/tok
            
             IERC1155(nftContract).safeBatchTransferFrom(msg.sender, address(this), tokenIds, amounts,"");
             
-         for (uint i = 1; i < tokenIds.length; i++){      
+         for (uint i = 1; i <= tokenIds.length; i++){      
            
                        _itemIds.increment();
             uint256 itemId = _itemIds.current();
