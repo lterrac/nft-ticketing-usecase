@@ -15,13 +15,13 @@ contract PaasPopTickets {
         
      }    
      
- function deployCollection(string memory uri, uint256 quantity)
+ function deployCollection(string memory uri,uint256[] memory ids, uint256[] memory amount)
         public
         returns(address)
         
     {
         owner = msg.sender; 
-    new NFTContract (quantity, uri, owner);  
+    new NFTContract ( uri, ids,amount,owner);  
       
     }
 
@@ -31,8 +31,10 @@ contract NFTContract is ERC1155, Ownable {
     using SafeMath for uint256;
 
     constructor(
-         uint256 quantity,
+         
          string memory uri,
+         uint256[] memory ids,
+         uint256[] memory amount,
          address owner
     )
         ERC1155( uri
@@ -40,10 +42,11 @@ contract NFTContract is ERC1155, Ownable {
             )
     {
         
-   for ( uint i=0; i < quantity; i++) { 
+//    for ( uint i=0; i < quantity; i++) { 
    
-        _mint(owner, i, 1, "");
-    }
+//         _mint(owner, i, 1, "");
+//     }
+  _mintBatch(owner, ids,amount,"");
     }
 
 
