@@ -18,7 +18,7 @@ event ContractCreated(address newAddress, string metadata,string name, string im
  function deployCollection(string memory uri,uint256[] memory ids, uint256[] memory amount, string memory name, string memory image )
         public
        
-        returns(address)
+  
         
     {
       owner = msg.sender; 
