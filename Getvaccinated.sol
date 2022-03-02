@@ -36,13 +36,13 @@ contract APIConsumer is ChainlinkClient {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
         
         // Set the URL to perform the GET request on
-        request.add("get", "https://covid-api.mmediagroup.fr/v1/vaccines?country=Italy");
+        request.add("get", "https://api.apify.com/v2/key-value-stores/UFpnR8mukiu0TSrb4/records/LATEST?disableRedirect=true");
         
        
         // {"All":
         //people_vaccinated
         //  
-        request.add("path", "All.people_vaccinated");
+        request.add("path", "totalHospitalized");
         
         // Multiply the result by 1000000000000000000 to remove decimals
         int timesAmount = 10**18;
