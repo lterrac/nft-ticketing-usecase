@@ -1,7 +1,7 @@
 # nft-ticketing-usecase
 In this repo there are 3 different Smart Contract for the Paaspo PoC.
 
-- Marketplace.sol
+- Marketplace1155.sol
 - Mint_721_Collection.sol
 - Iexec_Abstract.sol
 
