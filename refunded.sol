@@ -1,6 +1,6 @@
     // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
-    import "./totalhosp.sol";
+    import "./Getvaccinated.sol";
     import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Counters.sol";
     contract Refunded is APIConsumer {
          using Counters for Counters.Counter;
