@@ -36,13 +36,13 @@ contract APIConsumer is ChainlinkClient {
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
         
         // Set the URL to perform the GET request on
-        request.add("get", "https://api.apify.com/v2/key-value-stores/UFpnR8mukiu0TSrb4/records/LATEST?disableRedirect=true");
+        request.add("get", "https://api.apify.com/v2/key-value-stores/vqnEUe7VtKNMqGqFF/records/LATEST?disableRedirect=true");
         
        
-        // {"All":
-        //people_vaccinated
-        //  
-        request.add("path", "totalHospitalized");
+        // { infectedByRegion:
+        // 2
+        //  infectedCount
+        request.add("path", "infectedByRegion.2.infectedCount");
         
         // Multiply the result by 1000000000000000000 to remove decimals
         int timesAmount = 10**18;
@@ -50,6 +50,7 @@ contract APIConsumer is ChainlinkClient {
         
         // Sends the request
         return sendChainlinkRequestTo(oracle, request, fee);
+        
     }
     
     /**
@@ -60,5 +61,5 @@ contract APIConsumer is ChainlinkClient {
         volume = _volume;
     }
 
-    // function withdrawLink() external {} - Implement a withdraw function to avoid locking your LINK in the contract
+
 }
