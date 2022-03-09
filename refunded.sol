@@ -1,6 +1,6 @@
     // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
-    import "./GetInfected.sol";
+    import "./totalhosp.sol";
     import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Counters.sol";
     contract Refunded is APIConsumer {
          using Counters for Counters.Counter;
@@ -25,7 +25,9 @@ pragma solidity ^0.8.4;
          uint256 itemId
 
      ) public{
-             
+             require(idRefundParameters[itemId].itemId == (0));
+             require(idRefundParameters[itemId].owner == (0x0000000000000000000000000000000000000000));
+               require(idRefundParameters[itemId].nftContract == (0x0000000000000000000000000000000000000000));
              idRefundParameters[itemId] =  RefundParameters(
                 itemId,
                 nftContract,
