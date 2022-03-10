@@ -38,13 +38,6 @@ pragma solidity ^0.8.4;
             );
      }
 
-    function CallnRef ( address payable[] memory clients,
-        uint itemId
-     )public payable {
-
-        requestVolumeData();
-        refundUsers(clients, itemId);
-    }
 
     function refundUsers(
        
