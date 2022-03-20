@@ -1,0 +1,23 @@
+{
+  "name": "nft-ticketing-usecase",
+  "version": "1.0.0",
+  "description": "In this repo there are 5 different Smart Contract for the Paaspo PoC.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lterrac/nft-ticketing-usecase.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lterrac/nft-ticketing-usecase/issues"
+  },
+  "homepage": "https://github.com/lterrac/nft-ticketing-usecase#readme",
+  "dependencies": {
+    "@chainlink/contracts": "^0.4.0",
+    "truffle": "^5.5.5"
+  }
+}
