@@ -24,7 +24,7 @@ contract Refunded is APIConsumer {
         address nftContract,
         uint256 maxInfection,
         uint256 price,
-        uint256 itemId
+        uint256 itemId // perche' un singolo item id? l'item e' il singolo biglietto la tipologia?
     ) public {
         // chi chiama questa funzione?
         // Posso chiamare questa funzione per conto di qualcun altro?
@@ -51,7 +51,7 @@ contract Refunded is APIConsumer {
 
     // come mai abbiamo solo un itemId?
     // chi sono i clients?
-    function refundUsers(address payable[] memory clients, uint256 itemId) 
+    function refundUsers(address payable[] memory clients, uint256 itemId)
         public
         payable
     {
@@ -62,6 +62,8 @@ contract Refunded is APIConsumer {
         idRefundParameters[itemId].refunded = true;
         for (uint256 i = 0; i < length; i++)
             // questa for puo' andare in out of gas
+            // da dove arrivano i soldi? dovrebbero essere contenuti nella transazione -> serve un controllo che nella transazione ci siano soldi per tutti i clients
+            // se i clients sono troppi? posso farlo due volte
             clients[i].transfer(idRefundParameters[itemId].price);
     }
 
@@ -70,7 +72,7 @@ contract Refunded is APIConsumer {
         view
         returns (RefundParameters memory)
     {
-        //  uint itemCount = _itemIds.current();
+        //  uint itemCount = _itemIds.current(); //possiamo toglierlo?
 
         return idRefundParameters[itemId];
     }

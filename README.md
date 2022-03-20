@@ -1,4 +1,7 @@
-# nft-ticketing-usecase
+# nft-ticketing-usecase audit
+This forks is intended to be used for auditing the original code of the `nft-ticketing-usecase`. All contracts can be found [here](./contracts/)
+
+
 In this repo there are 5 different Smart Contract for the Paaspo PoC.
 
 - Marketplace1155.sol
