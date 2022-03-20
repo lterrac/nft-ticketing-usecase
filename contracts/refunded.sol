@@ -24,16 +24,12 @@ contract Refunded is APIConsumer {
         address nftContract,
         uint256 maxInfection,
         uint256 price,
-        uint256 itemId // perche' un singolo item id? l'item e' il singolo biglietto la tipologia?
+        uint256 itemId
     ) public {
-        // chi chiama questa funzione?
-        // Posso chiamare questa funzione per conto di qualcun altro?
-        // Esempio: B ha un biglietto, A puo' chiamare questa funzione per il biglietto di B?
-        // il price lo sceglie chi chiama questa funzione?
         require(idRefundParameters[itemId].itemId == (0));
         require(
             idRefundParameters[itemId].owner ==
-                (0x0000000000000000000000000000000000000000) // address(0)?
+                (0x0000000000000000000000000000000000000000)
         );
         require(
             idRefundParameters[itemId].nftContract ==
@@ -42,15 +38,13 @@ contract Refunded is APIConsumer {
         idRefundParameters[itemId] = RefundParameters(
             itemId,
             nftContract,
-            (msg.sender), //chi lo chiama?
+            (msg.sender),
             price,
             maxInfection,
             false
         );
     }
 
-    // come mai abbiamo solo un itemId?
-    // chi sono i clients?
     function refundUsers(address payable[] memory clients, uint256 itemId)
         public
         payable
@@ -58,12 +52,9 @@ contract Refunded is APIConsumer {
         uint256 length = clients.length;
         require(idRefundParameters[itemId].owner == msg.sender);
         require(idRefundParameters[itemId].refunded == false);
-        require(APIConsumer.volume <= idRefundParameters[itemId].maxInfection); // non dovremmo fare il refund quando i contagiati sono sopra a una certa soglia?
+        require(APIConsumer.volume <= idRefundParameters[itemId].maxInfection);
         idRefundParameters[itemId].refunded = true;
         for (uint256 i = 0; i < length; i++)
-            // questa for puo' andare in out of gas
-            // da dove arrivano i soldi? dovrebbero essere contenuti nella transazione -> serve un controllo che nella transazione ci siano soldi per tutti i clients
-            // se i clients sono troppi? posso farlo due volte
             clients[i].transfer(idRefundParameters[itemId].price);
     }
 
@@ -72,7 +63,7 @@ contract Refunded is APIConsumer {
         view
         returns (RefundParameters memory)
     {
-        //  uint itemCount = _itemIds.current(); //possiamo toglierlo?
+        //  uint itemCount = _itemIds.current();
 
         return idRefundParameters[itemId];
     }

@@ -20,14 +20,14 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
     struct MarketItem {
         uint256 itemId;
         address nftContract;
-        uint256 tokenIds; // togli s finale
+        uint256 tokenIds;
         address payable seller;
         address payable owner;
         uint256 price;
-        bool sold; //serve?
+        bool sold;
     }
 
-    mapping(uint256 => MarketItem) private idToMarketItem; // a cosa mi serve la mappa. Sto rimappando i dati di 1155. Se non aggiunge informazione a cosa serve?
+    mapping(uint256 => MarketItem) private idToMarketItem;
 
     event MarketItemCreated(
         uint256 indexed itemId,
@@ -38,7 +38,6 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
         uint256 price,
         bool sold
     );
-    // serve il bool sold? quando lo creo puo' essere gia' venduto?
 
     event MarketItemSold(uint256 indexed itemId, address owner);
 
@@ -66,9 +65,9 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
         address nftContract,
         uint256[] memory tokenIds,
         uint256 price,
-        uint256[] memory amounts // se e' un nft amounts non dovrebbe essere sempre 1? siccome immagino siano tracked dai tokenIds questo mi sembra superfluo
+        uint256[] memory amounts
     ) public payable nonReentrant {
-        require(price > 0, "Price must be greater than 0"); // Non vogliamo controllare che tokenIds sia lungo quanto amounts?
+        require(price > 0, "Price must be greater than 0");
 
         IERC1155(nftContract).safeBatchTransferFrom(
             msg.sender,
@@ -79,7 +78,6 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
         );
 
         for (uint256 i = 0; i <= (tokenIds.length - 1); i++) {
-            //davide: possiamo usare solo il < e togliere il -1?
             _itemIds.increment();
             uint256 itemId = _itemIds.current();
 
@@ -102,8 +100,6 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
                 price,
                 false
             );
-
-            // non vale la pena emettere un evento solo invece di n?
         }
     }
 
@@ -120,8 +116,8 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
             msg.value == price,
             "Please submit the asking price in order to complete the purchase"
         );
-        require(sold != true, "This Sale has alredy finished"); //missing a
-        emit MarketItemSold(itemId, msg.sender); //Possiamo metterlo alla fine questo?
+        require(sold != true, "This Sale has alredy finished");
+        emit MarketItemSold(itemId, msg.sender);
 
         idToMarketItem[itemId].seller.transfer(msg.value);
         IERC1155(nftContract).safeBatchTransferFrom(
@@ -144,11 +140,6 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
         MarketItem[] memory items = new MarketItem[](unsoldItemCount);
         for (uint256 i = 0; i < itemCount; i++) {
             if (idToMarketItem[i + 1].owner == address(0)) {
-                // non possiamo ragionare in termini di i anzi che i + 1
-                // currentId cosi' si potrebbe togliere
-                // come mai cominciamo da a "contare" da 1 e non da 0?
-
-                //non possiamo controllare semplicemente se il bool sold e' a true?
                 uint256 currentId = i + 1;
                 MarketItem storage currentItem = idToMarketItem[currentId];
                 items[currentIndex] = currentItem;
@@ -157,5 +148,4 @@ contract marketPlace1155 is ReentrancyGuard, ERC1155Receiver {
         }
         return items;
     }
-    // why are we using three indexes instead of one
 }

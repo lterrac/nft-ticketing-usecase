@@ -35,10 +35,8 @@ contract PaasPopTickets {
         _itemIds.increment();
         uint256 itemId = _itemIds.current();
 
-        // qui chi chiama la funzione (chiunque potenzialmente) diventa owner della factory. Non penso sia corretto proporrei piuttosto che solo l'owner del contratto possa chiamare deployCollection(). A questo punto inizializzerei owner nel costruttore
         owner = msg.sender;
 
-        // Vedendo questa riga forse non serve un owner della factory
         NFTContract Collection = new NFTContract(uri, ids, amount, owner);
         emit ContractCreated(
             address(Collection),

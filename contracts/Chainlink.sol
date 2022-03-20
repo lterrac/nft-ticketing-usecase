@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// Ma questo file non si poteva importare?
-
 import {CBORChainlink} from "@chainlink/contracts/src/v0.8/CBORChainlink.sol";
 import {BufferChainlink} from "@chainlink/contracts/src/v0.8/BufferChainlink.sol";
 

@@ -16,6 +16,6 @@ contract NFTContract is ERC1155, Ownable {
             // "https://ipfs.moralis.io:2053/ipfs/QmS7izjgMprD3ZvP8aDBRiXbMZnxBsrUK4PJTwkcDFauij"
         )
     {
-        _mintBatch(owner, ids, amount, ""); //amount puo' essere diverso da 1? l'owner puo' mintare due volte lo stesso tokenId
+        _mintBatch(owner, ids, amount, "");
     }
 }
